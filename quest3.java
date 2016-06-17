@@ -4,55 +4,31 @@ import java.util.Arrays;
 
 public class quest3 {
 	
-	public static void sort(int[] a,int l,int h)
-	{
-		if(l<h)
-		{
-			int m=(l+h)/2;
-			sort(a,l,m);
-			sort(a,m+1,h);
-			merge(a,l,m,h);
-		}
-	}
-
-	public static void merge(int[] a,int l,int m,int h)
-	{
-		int i=l,j=m+1;
-		int[] b=new int[h-l+1];
-		int k=0;
-		while(i<=m && j<=h)
-		{
-			if(a[i]<=a[j])
-			{
-				b[k++]=a[i++];
-			}
-			else
-			{
-				b[k++]=a[j++];
-			}
-		}
-		while(i<=m)
-		{
-			b[k++]=a[i++];
-		}
-		while(j<=h)
-		{
-			b[k++]=a[j++];
-		}
-		j=l;
-		for(i=0;i<b.length;i++)
-		{
-			a[j++]=b[i];
-		}
-	}
-	
 	public static int[] max_3(int[] arr)
 	{
 		int[] a=new int[3];
-		sort(arr,0,arr.length-1);
-		a[0]=arr[arr.length-1];
-		a[1]=arr[arr.length-2];
-		a[2]=arr[arr.length-3];
+		int i=arr[0],j=Integer.MIN_VALUE,k=Integer.MIN_VALUE;
+		for(int x=1;x<arr.length;x++)
+		{
+			if(i<arr[x])
+			{
+				k=j;
+				j=i;
+				i=arr[x];
+			}
+			else if(j<arr[x])
+			{
+				k=j;
+				j=arr[x];
+			}
+			else if(k<arr[x])
+			{
+				k=arr[x];
+			}
+		}
+		a[0]=i;
+		a[1]=j;
+		a[2]=k;
 		return a;
 	}
 
